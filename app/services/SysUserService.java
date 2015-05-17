@@ -12,5 +12,7 @@ public interface SysUserService {
   public SysUser authenticate(String username, String password);
   
   public SysUser getUser();
+  
+  public void loadInitData();
     
 }

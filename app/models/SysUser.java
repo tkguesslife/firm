@@ -6,26 +6,30 @@
 package models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lib.Uniqid;
 
 /**
  *
@@ -159,12 +163,18 @@ public class SysUser implements Serializable {
     
     
     @JoinColumn(name = "contactId", referencedColumnName = "id")
-    @OneToOne
+    @OneToOne(cascade={CascadeType.ALL})
     private Contact contact;
     
     
 
     public SysUser() {
+        
+        salt = Uniqid.uniqid(String.valueOf(Uniqid.randInt(1, 1000000000)), true);
+        enabled = false;
+        locked = false;
+        expired = false;
+        credentialsExpired = false;
     }
 
     public SysUser(Integer id) {
@@ -185,6 +195,20 @@ public class SysUser implements Serializable {
         this.roles = roles;
         this.credentialsExpired = credentialsExpired;
         this.createdAt = createdAt;
+    }
+    
+    @PrePersist
+    public void prePersist(){
+        createdAt = new Date();
+        usernameCanonical = username.toLowerCase();
+        emailCanonical = email.toLowerCase();
+    }
+    
+    @PreUpdate
+    public void preUpdate(){
+        usernameCanonical = username.toLowerCase();
+        emailCanonical = emailCanonical.toLowerCase();
+        updatedAt = new Date();
     }
 
     public Integer getId() {
@@ -306,6 +330,7 @@ public class SysUser implements Serializable {
     public void setRoles(String roles) {
         this.roles = roles;
     }
+    
 
     public boolean getCredentialsExpired() {
         return credentialsExpired;

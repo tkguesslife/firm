@@ -31,6 +31,7 @@ public class DataConfig {
         entityManagerFactory.setPackagesToScan("models", "services");
         entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
         entityManagerFactory.setDataSource(dataSource());
+        entityManagerFactory.setPersistenceUnitName("default");
         entityManagerFactory.setJpaPropertyMap(new HashMap<String, String>() {
             {
                 put("hibernate.hbm2ddl.auto", "update");
@@ -48,7 +49,7 @@ public class DataConfig {
         return transactionManager;
     }
 
-    @Bean
+    @Bean(name = "mysql_datasource")
     public DataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(Play.application().configuration().getString("db.default.driver"));

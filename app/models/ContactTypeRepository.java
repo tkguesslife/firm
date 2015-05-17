@@ -13,9 +13,10 @@ import org.springframework.stereotype.Repository;
  *
  * @author Tiko Banyini <tiko@falcorp.co.za>
  */
-@Repository
 public interface ContactTypeRepository extends CrudRepository<ContactType, Serializable>{
  
     public ContactType findByName(String name);
+    
+    
     
 }

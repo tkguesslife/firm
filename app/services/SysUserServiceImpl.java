@@ -8,6 +8,7 @@ package services;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import lib.MessageDigestPasswordEncoder;
+import models.Contact;
 import models.SysUser;
 import models.SysUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ import play.mvc.Controller;
 @Transactional
 public class SysUserServiceImpl implements SysUserService {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "default")
     EntityManager em;
     
     @Autowired
@@ -68,6 +69,21 @@ public class SysUserServiceImpl implements SysUserService {
     public SysUser getUser() {
         SysUser user = sysUserRepository.findByUsername(Controller.session().get("username"));
         return user;
+    }
+    
+    public void loadInitData(){
+        
+        Contact contact = new Contact();
+        contact.setFirstname("Tiko");
+        contact.setLastname("Banyini");
+//        contact.setContactType();
+        
+        
+        SysUser admin = new SysUser();
+        admin.setUsername("admin");
+        
+        
+        
     }
 
     

@@ -1,0 +1,18 @@
+## YAML Template.
+---
+
+#contact type
+
+contactTypes:
+    
+    - !!models.ContactType
+        name:       Individual
+
+    - !!models.ContactType
+        name:       Company
+
+    - !!models.ContactType
+        name:       Organisation
+  
+    - !!models.ContactType
+        name:       Other

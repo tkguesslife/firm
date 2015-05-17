@@ -1,0 +1,30 @@
+
+@base("Init Application"){
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Initialise app</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <form role="form" action="@routes.Application.doInit" method="POST">
+            <div class="form-group">
+                <label>Data to laod</label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="load_option" value="users">Users
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="load_option" value="companies">Companies
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="load_option" value="etc">etc
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Button</button>
+        </form>
+
+    </div>
+</div>
+}

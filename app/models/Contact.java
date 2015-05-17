@@ -67,13 +67,7 @@ public class Contact implements Serializable {
     
     @Size(max = 100)
     @Column(name = "idnumber")
-    @Constraints.Required(message="Required")
     private String idnumber;
-    
-    
-    @Column(name = "dateOfBirth")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateOfBirth;
     
     
     @JoinColumn(name = "contactDetailId", referencedColumnName = "id")
@@ -196,13 +190,6 @@ public class Contact implements Serializable {
         return this.firstname+" "+this.lastname;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
     
     
     

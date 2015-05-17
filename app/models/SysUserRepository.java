@@ -1,17 +1,14 @@
 package models;
 
+import java.io.Serializable;
 import org.springframework.data.repository.CrudRepository;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
-import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Tiko Banyini <tiko@falcorp.co.za>
  */
-@Repository
-public interface SysUserRepository extends CrudRepository<SysUser, Long> {
+public interface SysUserRepository extends CrudRepository<SysUser, Serializable> {
 
     public SysUser findByEmail(String email);
     

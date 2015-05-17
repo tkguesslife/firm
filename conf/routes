@@ -5,9 +5,15 @@
 # Home page
 GET     /                           controllers.Application.index()
 GET     /full                           @controllers.Application.full
+GET     /app                           @controllers.Application.app
 GET     /login                           	@controllers.Application.login
+POST     /login                           	@controllers.Application.doLogin
+GET     /init                           	@controllers.Application.loadInitData
+POST    /doInit                           	@controllers.Application.doInit
+GET     /logout                           	@controllers.Application.logout
 
-
+POST    /user/save                             @controllers.UserController.saveUser
+GET     /user/list                             @controllers.UserController.list
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
